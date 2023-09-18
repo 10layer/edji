@@ -1118,6 +1118,32 @@ const JXP = function(options) {
 		res.send(await openapi.generate_spec(openapi));
 	});
 
+	server.get("/table_view/:collection", async (req, res) => {
+		const modelname = req.params.collection;
+		const model = models[modelname];
+		if (!model) {
+			throw new errors.NotFoundError(`Couldn't find collection ${modelname}`);
+		}
+		const table_view = model.schema.table_view || null;
+		if (!table_view) {
+			throw new errors.NotFoundError(`Couldn't find table_view for collection ${modelname}`);
+		}
+		res.send(table_view);
+	});
+
+	server.get("/form_view/:collection", async (req, res) => {
+		const modelname = req.params.collection;
+		const model = models[modelname];
+		if (!model) {
+			throw new errors.NotFoundError(`Couldn't find collection ${modelname}`);
+		}
+		const form_view = model.schema.form_view || null;
+		if (!form_view) {
+			throw new errors.NotFoundError(`Couldn't find form_view for collection ${modelname}`);
+		}
+		res.send(form_view);
+	});
+
 	return server;
 };
 
