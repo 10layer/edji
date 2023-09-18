@@ -20,6 +20,15 @@ var UserSchema = new JXPSchema({
 	}
 });
 
+UserSchema.table_view = {
+	fields: {"name": "string", "email": "email", "admin": "boolean" },
+	default_sort_field: "name",
+	search_fields: ["name", "email"],
+	sort_fields: ["name", "email"],
+	singular: "user",
+	plural: "users",
+}
+
 UserSchema.path('name').validate(function (v) {
 	return (v) && (v.length > 0);
 }, 'Name cannot be empty');
