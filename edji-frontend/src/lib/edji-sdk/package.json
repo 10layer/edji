@@ -1,0 +1,27 @@
+{
+    "name": "@10layer/edji-sdk",
+    "description:": "A Javascript SDK for EDJI, the API Framework",
+    "version": "0.0.1",
+    "private": false,
+    "main": "edji-sdk.js",
+    "scripts": {
+      "start": "node edji-sdk.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/10layer/edji.git"
+    },
+    "keywords": [
+      "api",
+      "mongoose"
+    ],
+    "author": "Jason Norwood-Young <jason@10layer.com> (https://github.com/j-norwood-young/)",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/10layer/edji/issues"
+    },
+    "dependencies": {
+      
+    }
+  }
+  

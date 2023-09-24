@@ -1,6 +1,7 @@
 <script>
     import Input from "$lib/ui/input.svelte";
     import Button from "$lib/ui/button.svelte";
+    import Form from "$lib/ui/form.svelte";
 
     let email = "";
     let email_note = "";
@@ -38,10 +39,9 @@
     }
 </script>
 
-<form method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+<Form>
     <Input bind:value={email} type="email" label="Administrator Email" id="email" name="email" placeholder="admin@edji.com" on:input={handleEmailChange} bind:note={email_note} />
     <Input bind:value={password} type="password" label="Administrator Password" id="password" name="password" on:input={handlePasswordChange} bind:note={password_note} placeholder="********" />
     <Input bind:value={password_confirm} type="password" label="Confirm Password" id="password_confirm" name="password_confirm" bind:note={ password_confirm_note } on:input={handlePasswordChange} placeholder="********" />
     <Button type="submit" bind:disabled >Submit</Button>
-
-</form>
+</Form>

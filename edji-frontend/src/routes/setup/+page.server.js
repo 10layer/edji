@@ -1,6 +1,7 @@
-import { BACKEND, check_status } from "$lib/api/edji.js"
+import { check_status } from "$lib/api/edji.js"
 import { error } from "@sveltejs/kit";
 import { redirect }  from "@sveltejs/kit"
+import { API_HOST } from "$env/static/private";
 
 export async function load() {
     let status = {
@@ -38,7 +39,7 @@ export const actions = {
             throw error(400, "Password must be at least 8 characters.");
         }
         try {
-            const result = await fetch(`${BACKEND}/setup`, {
+            const result = await fetch(`${ API_HOST }/setup`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

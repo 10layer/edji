@@ -20,11 +20,42 @@ var UserSchema = new JXPSchema({
 	}
 });
 
-UserSchema.table_view = {
-	fields: {"name": "string", "email": "email", "admin": "boolean" },
-	default_sort_field: "name",
-	search_fields: ["name", "email"],
-	sort_fields: ["name", "email"],
+UserSchema.table_def = {
+	fields: [
+		{
+			"label": "Name",
+			"name": "name",
+			"type": "text",
+			"link": {
+				"collection": "user",
+				"field": "urlid"
+			},
+			"search": true,
+			"sort": true,
+			"filter": false,
+			"sort_dir": 1,
+		},
+		{
+			"label": "Email",
+			"name": "email",
+			"type": "email",
+			"search": true,
+			"sort": true,
+			"filter": false,
+			"sort_dir": 1,
+			d: "return `<a href='mailto:${row.email}'>${row.email}</a>`"
+		},
+		{
+			"label": "Admin",
+			"name": "admin",
+			"type": "boolean",
+			"search": false,
+			"sort": true,
+			"filter": true,
+			"sort_dir": 1,
+			d: "return row.admin ? 'Yes' : 'No'"
+		}
+	],
 	singular: "user",
 	plural: "users",
 }

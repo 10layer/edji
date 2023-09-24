@@ -9,12 +9,14 @@
     <title>EDJI :: Login</title>
 </svelte:head>
 
-<div class="container">
-    <h1>Login</h1>
+<div class="flex h-full flex-col justify-center items-center">
+    <h1 class="m-6">Login</h1>
     {#if form?.login_error}
     <Alert type="error">
         <p>{form.login_error}</p>
     </Alert>
     {/if}
-    <LoginForm />
+    <div class="">
+        <LoginForm />
+    </div>
 </div>
