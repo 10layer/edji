@@ -1,7 +1,7 @@
 <script>
-    import Input from "$lib/ui/input.svelte";
+    import Input from "$lib/ui/form/input.svelte";
     import Button from "$lib/ui/button.svelte";
-    import Form from "$lib/ui/form.svelte";
+    import Form from "$lib/ui/form/form.svelte";
 
     let email = "";
     let email_note = "";

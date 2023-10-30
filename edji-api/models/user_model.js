@@ -2,12 +2,11 @@
 var friendly = require("mongoose-friendly");
 
 var UserSchema = new JXPSchema({
-	name: { type: String },
+	name: { type: String, index: true, required: true },
 	urlid: { type: String, unique: true, index: true },
-	email: { type: String, unique: true, index: true, set: toLower },
-	password: String,
-	admin: Boolean,
-	temp_hash: String,
+	email: { type: String, unique: true, index: true, set: toLowerTrim, required: true },
+	password: { type: String, required: true },
+	admin: Boolean
 },
 {
 	perms: {
@@ -30,20 +29,24 @@ UserSchema.table_def = {
 				"collection": "user",
 				"field": "urlid"
 			},
+			"required": true,
 			"search": true,
 			"sort": true,
 			"filter": false,
 			"sort_dir": 1,
+			"views": ["list", "edit", "create"]
 		},
 		{
 			"label": "Email",
 			"name": "email",
 			"type": "email",
+			"required": true,
 			"search": true,
 			"sort": true,
 			"filter": false,
 			"sort_dir": 1,
-			d: "return `<a href='mailto:${row.email}'>${row.email}</a>`"
+			d: "return `<a href='mailto:${row.email}'>${row.email}</a>`",
+			"views": ["list", "edit", "create"]
 		},
 		{
 			"label": "Admin",
@@ -53,7 +56,19 @@ UserSchema.table_def = {
 			"sort": true,
 			"filter": true,
 			"sort_dir": 1,
-			d: "return row.admin ? 'Yes' : 'No'"
+			d: "return row.admin ? 'Yes' : 'No'",
+			"views": ["list", "edit", "create"]
+		},
+		{
+			"label": "Password",
+			"name": "password",
+			"type": "password",
+			"required": true,
+			"search": false,
+			"sort": false,
+			"filter": false,
+			d: "return '**********'",
+			"views": ["create"]
 		}
 	],
 	singular: "user",
@@ -69,10 +84,11 @@ UserSchema.plugin(friendly, {
 	friendly: 'urlid'
 });
 
-function toLower (v) {
-	if (v)
-		return v.toLowerCase();
-	return null;
+function toLowerTrim (v) {
+	if (!v) return null;
+	if (typeof v === 'string')
+		return v.toLowerCase().trim();
+	return v;
 }
 
 const UserModel = JXPSchema.model('User', UserSchema);

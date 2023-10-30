@@ -24,7 +24,7 @@ export async function load() {
 };
     
 export const actions = {
-    default: async ({ request, locals }) => {
+    default: async ({ request, cookies }) => {
         const data = await request.formData();
         const email = data.get("email");
         const password = data.get("password");
@@ -40,7 +40,8 @@ export const actions = {
         });
         const login_result = await result.json();
         if (login_result.token) {
-            await locals.session.set({ token: login_result.token });
+            await cookies.set("token", login_result.token);
+            await cookies.set("apikey", login_result.apikey);
             throw redirect(303, "/dashboard");
         } else {
             return {

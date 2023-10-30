@@ -1,7 +1,6 @@
 <script>
     import LoginForm from './login_form.svelte';
     import Alert from '$lib/ui/alert.svelte';
-    export let data;
     export let form;
 </script>
 

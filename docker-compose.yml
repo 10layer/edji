@@ -41,11 +41,13 @@ services:
     restart: unless-stopped
     ports:
       - $FRONTEND_PORT:8080
+      # - 9229:9229
     stdin_open: true
     tty: true
     volumes:
       - ./edji-frontend/src:/opt/edji-frontend/src
       - ./edji-frontend/package.json:/opt/edji-frontend/package.json
+      # - ./edji-frontend/node_modules:/opt/edji-frontend/node_modules
     env_file: ./.env
     environment:
       - API_HOST=$API_HOST

@@ -1,5 +1,6 @@
-export function load({ locals }) {
+export async function load({ cookies }) {
+	const token = await cookies.get('token');
 	return {
-		session: locals.session.data
+		logged_in: !!token
 	};
 }

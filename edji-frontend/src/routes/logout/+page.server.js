@@ -1,6 +1,7 @@
 export const actions = {
-    default: async ({ locals }) => {
-        await locals.session.destroy();
+    default: async ({ cookies }) => {
+        await cookies.delete("token");
+        await cookies.delete("apikey");
         return {};
     }
 }

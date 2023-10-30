@@ -15,8 +15,8 @@
             ],
             layout: "BaseLayout",
             onComplete: function() {
-                console.log(data.session.token);
-                ui.preauthorizeApiKey("bearerAuth", data.session.token);
+                console.log(data.cookies.token);
+                ui.preauthorizeApiKey("bearerAuth", data.cookies.token);
             }
         })
     });
