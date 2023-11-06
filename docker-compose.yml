@@ -41,7 +41,7 @@ services:
     restart: unless-stopped
     ports:
       - $FRONTEND_PORT:8080
-      - 9229:9229
+      # - 9229:9229
     stdin_open: true
     tty: true
     volumes:
