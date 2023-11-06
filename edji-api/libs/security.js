@@ -110,8 +110,8 @@ const getGroups = async user_id => {
 	}
 };
 
-const encPassword = password => {
-	return bcrypt.hashSync(password, 4);
+const encPassword = async password => {
+	return bcrypt.hash(password, 4);
 };
 
 const generateApiKey = async user_id => {

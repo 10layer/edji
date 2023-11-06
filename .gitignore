@@ -1,6 +1,7 @@
 .DS_STORE
 config.*
-node_modules/*
+node_modules
+docker_node_modules
 logs/*
 config/*
 *.log

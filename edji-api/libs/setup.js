@@ -31,8 +31,9 @@ const setup = async (req, res) => {
 		const db = client.db(client.databaseName);
 		// console.log(req.body.email, req.body.password);
 		const password = (req.body && req.body.password) ? req.body.password : rand_token.generate(12);
+		const encPassword = await security.encPassword(password);
 		const user = {
-			password: security.encPassword(password),
+			password: encPassword,
 			email: req.body.email || "admin@example.com",
 			name: req.body.name || "admin",
 			admin: true
@@ -46,6 +47,7 @@ const setup = async (req, res) => {
 			password,
 			result
 		);
+		console.log(encPassword);
 		res.send({
 			status: "success",
 			name: user.name,

@@ -17,8 +17,6 @@ interface EdjiSDKFetchOptions {
     headers: EdjiSDKFetchOptionHeaders;
 }
 
-import { default as node_fetch } from 'node-fetch';
-
 class EdjiSDK {
     _api_server: String;
     _api_key?: String;
@@ -57,8 +55,9 @@ class EdjiSDK {
                 method: opts?.method || "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "Accept": "application/json"
-                }
+                    Accept: "application/json",
+                    ReferrerPolicy: "no-referrer"
+                },
             };
             if (this._token) {
                 options.headers = Object.assign(options.headers || {}, {
@@ -70,7 +69,7 @@ class EdjiSDK {
                 options.body = JSON.stringify(body);
             }
             console.log(url, options);
-            const res = await node_fetch(url, options as any);
+            const res = await fetch(url, options);
             console.log(res);
             const json = await res.json();
             if (res.status !== 200) {
@@ -86,7 +85,7 @@ class EdjiSDK {
 
     async check_status() {
         try {
-            const res = await node_fetch(`${this._api_server}/status`);
+            const res = await fetch(`${this._api_server}/status`);
             return await res.json();
         } catch(err) {
             console.error(err);
@@ -96,7 +95,7 @@ class EdjiSDK {
 
     async get_collections() {
         try {
-            const res = await node_fetch(`${this._api_server}/model`);
+            const res = await fetch(`${this._api_server}/model`);
             return await res.json();
         } catch(err) {
             console.error(err);
@@ -106,7 +105,7 @@ class EdjiSDK {
 
     async get_collection(collection: String) {
         try {
-            const res = await node_fetch(`${this._api_server}/model/${collection}`);
+            const res = await fetch(`${this._api_server}/model/${collection}`);
             return await res.json();
         } catch(err) {
             console.error(err);
@@ -116,7 +115,7 @@ class EdjiSDK {
 
     async login(username: string, password: string) {
         try {
-            const res = await node_fetch(`${this._api_server}/login`, {
+            const res = await fetch(`${this._api_server}/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -177,9 +176,11 @@ class EdjiSDK {
             const result = await this.fetch(url, {
                 method: "POST",
             }, data);
+            console.log({result});
             if (this._debug) console.timeEnd(label);
             return result;
         } catch(err: any) {
+            console.log(err);
             if (this._debug) console.timeEnd(label);
             // this._displayError(err);
             throw(err.response ? err.response.data : err);
@@ -190,7 +191,7 @@ class EdjiSDK {
         const label = `table_def.${collection}-${Date.now()}`;
         if (this._debug) console.time(label);
         try {
-            const result = await node_fetch(`${this._api_server}/table_def/${collection}`);
+            const result = await fetch(`${this._api_server}/table_def/${collection}`);
             if (this._debug) console.timeEnd(label);
             return result.json();
         } catch(err: any) {
@@ -203,7 +204,7 @@ class EdjiSDK {
         const label = `form_def.${collection}-${Date.now()}`;
         if (this._debug) console.time(label);
         try {
-            const result = await node_fetch(`${this._api_server}/form_def/${collection}`);
+            const result = await fetch(`${this._api_server}/form_def/${collection}`);
             if (this._debug) console.timeEnd(label);
             return result.json();
         } catch(err: any) {

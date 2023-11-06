@@ -1,5 +1,6 @@
 .DS_Store
 node_modules
+docker_node_modules
 /build
 /.svelte-kit
 /package

@@ -1,5 +1,5 @@
 /* global JXPSchema */
-var friendly = require("mongoose-friendly");
+// const friendlyMongoose = require("../libs/friendly");
 
 var UserSchema = new JXPSchema({
 	name: { type: String, index: true, required: true },
@@ -79,10 +79,10 @@ UserSchema.path('name').validate(function (v) {
 	return (v) && (v.length > 0);
 }, 'Name cannot be empty');
 
-UserSchema.plugin(friendly, {
-	source: 'name',
-	friendly: 'urlid'
-});
+// UserSchema.plugin(friendlyMongoose, {
+// 	source: 'name',
+// 	slugField: 'urlid'
+// });
 
 function toLowerTrim (v) {
 	if (!v) return null;

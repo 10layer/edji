@@ -10,7 +10,7 @@
 <header>
 	<div class="corner">
 		<a href="/">
-			<img src={logo} alt="SvelteKit" />
+			<img src={logo} alt="Edji" />
 		</a>
 	</div>
 
@@ -51,39 +51,10 @@
 		background-color: rgb(50, 50, 50);
 	}
 
-	/* .corner {
-		width: 6em;
-		height: 3em;
-	}
-
-	.corner a {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
-	}
-
-	.corner img {
-		width: 5em;
-		height: 3em;
-		object-fit: contain;
-	} */
-
 	nav {
 		display: flex;
 		justify-content: center;
 		color: white;
-	}
-
-	svg {
-		width: 6em;
-		height: 3em;
-		display: block;
-	}
-
-	path {
-		fill: var(--background);
 	}
 
 	ul {

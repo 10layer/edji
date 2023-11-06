@@ -14,7 +14,14 @@ const config = {
 		preprocess({
 			postcss: true
 		})
-	]
+	],
+
+	vitePlugin: {
+		onwarn: (warning, defaultHandler) => {
+			console.log('svelte:warnings:%s', JSON.stringify(warning));
+			defaultHandler(warning);
+		}
+	}
 };
 
 export default config;

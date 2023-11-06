@@ -153,6 +153,7 @@ const login = async (req, res) => {
 	try {
 		const user = await User.findOne({ email });
 		if (!user) throw (`Incorrect email; email: ${email}`);
+		console.log("user", user, "password", password);
 		if (!(await bcrypt.compare(password, user.password))) {
 			throw (`Incorrect password; email: ${email}`);
 		}

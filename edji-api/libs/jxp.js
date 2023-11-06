@@ -39,11 +39,10 @@ const middlewareModel = (req, res, next) => {
 	}
 };
 
-const middlewarePasswords = (req, res, next) => {
+const middlewarePasswords = async (req) => {
 	if (req.body && req.body.password && !req.query.password_override) {
-		req.body.password = security.encPassword(req.body.password);
+		req.body.password = await security.encPassword(req.body.password);
 	}
-	next();
 };
 
 const middlewareCheckAdmin = (req, res, next) => {
@@ -223,7 +222,9 @@ const actionPost = async (req, res) => {
 			item._owner_id = res.user._id;
 			item.__user = res.user;
 		}
+		console.dir(item);
 		const result = await item.save();
+		console.log("Saved");
 		let silence = req.params._silence;
 		if (req.body && req.body._silence) silence = true;
 		if (!silence) {
