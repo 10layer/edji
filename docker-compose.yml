@@ -35,9 +35,7 @@ services:
       - ./edji-api/openapi:/opt/edji-api/openapi
 
   frontend:
-    build: 
-      dockerfile: ./edji-frontend/Dockerfile
-      context: ./
+    build: ./edji-frontend
     restart: unless-stopped
     ports:
       - $FRONTEND_PORT:8080
@@ -46,8 +44,9 @@ services:
     tty: true
     volumes:
       - ./edji-frontend/src:/opt/edji-frontend/src
+      - ./edji-frontend/static:/opt/edji-frontend/static
+      - ./edji-frontend/tests:/opt/edji-frontend/tests
       - ./edji-frontend/package.json:/opt/edji-frontend/package.json
-      # - ./docker_node_modules:/opt/edji-frontend/node_modules
     env_file: ./.env
     environment:
       - API_HOST=$API_HOST
