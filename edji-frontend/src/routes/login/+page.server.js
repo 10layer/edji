@@ -40,8 +40,8 @@ export const actions = {
         });
         const login_result = await result.json();
         if (login_result.token) {
-            await cookies.set("token", login_result.token);
-            await cookies.set("apikey", login_result.apikey);
+            await cookies.set("token", login_result.token, { path: "/" });
+            await cookies.set("apikey", login_result.apikey, { path: "/" });
             throw redirect(303, "/dashboard");
         } else {
             return {

@@ -1,7 +1,7 @@
 export const actions = {
     default: async ({ cookies }) => {
-        await cookies.delete("token");
-        await cookies.delete("apikey");
+        await cookies.delete("token", { path: "/" });
+        await cookies.delete("apikey", { path: "/" });
         return {};
     }
 }
